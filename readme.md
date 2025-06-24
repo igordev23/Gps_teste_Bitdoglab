@@ -20,6 +20,8 @@ Na BitDogLab, que integra a Raspberry Pi Pico W, a conexão UART para módulos e
 
 Dessa forma, o módulo GPS deve ter seu pino TX conectado ao GPIO1 da Pico (RX), e seu pino RX conectado ao GPIO0 da Pico (TX), respeitando o cruzamento necessário para comunicação UART.
 
+📚 **Fonte**: [Banco de Informações de Hardware (BIH) - BitDogLab V7](https://docs.google.com/document/d/13-68OqiU7ISE8U2KPRUXT2ISeBl3WPhXjGDFH52eWlU/edit?usp=sharing)
+
 ## Configuração no código-fonte (C com SDK Pico)
 
 No código que roda na Raspberry Pi Pico W, os pinos e UART usados para comunicação com o GPS são configurados da seguinte forma:
