@@ -15,9 +15,9 @@ if(WIN32)
 else()
     set(USERHOME $ENV{HOME})
 endif()
-set(sdkVersion 1.5.1)
-set(toolchainVersion 13_2_Rel1)
-set(picotoolVersion 2.0.0)
+set(sdkVersion 2.1.1)
+set(toolchainVersion 14_2_Rel1)
+set(picotoolVersion 2.1.1)
 set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
 if (EXISTS ${picoVscode})
     include(${picoVscode})
@@ -28,36 +28,35 @@ set(PICO_BOARD pico_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(gps_serial_monitor C CXX ASM)
+project(gps_uart C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(gps_serial_monitor gps_serial_monitor.c )
+add_executable(gps_uart gps_uart.c )
 
-pico_set_program_name(gps_serial_monitor "gps_serial_monitor")
-pico_set_program_version(gps_serial_monitor "0.1")
+pico_set_program_name(gps_uart "gps_uart")
+pico_set_program_version(gps_uart "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(gps_serial_monitor 0)
-pico_enable_stdio_usb(gps_serial_monitor 1)
+pico_enable_stdio_uart(gps_uart 1)
+pico_enable_stdio_usb(gps_uart 1)
 
 # Add the standard library to the build
-target_link_libraries(gps_serial_monitor
-        pico_stdlib
-        hardware_uart)
+target_link_libraries(gps_uart
+        pico_stdlib)
 
 # Add the standard include files to the build
-target_include_directories(gps_serial_monitor PRIVATE
+target_include_directories(gps_uart PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
 # Add any user requested libraries
-target_link_libraries(gps_serial_monitor 
+target_link_libraries(gps_uart 
         
-        hardware_uart)
+        )
 
-pico_add_extra_outputs(gps_serial_monitor)
+pico_add_extra_outputs(gps_uart)
 
